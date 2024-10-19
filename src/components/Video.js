@@ -27,7 +27,7 @@ function Video() {
           zIndex: -1,
         }}
       >
-        <source src="/assests/Video2.mp4" type="video/mp4" />
+        <source src="/assets/Video2.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <Box
