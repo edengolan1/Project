@@ -3,14 +3,14 @@
   color: white;
   border: 0;
   border-radius: 90px;
-  width: 180px;
+  width: 175px;
   text-align: center;
   line-height: 30px;
   position: relative;
   overflow: hidden;
   z-index: 1;
   transition: 0.5s;
-  height: 45px;
+  height: 43px;
   background: #018ba3;
   font-size: 18px;
 }
