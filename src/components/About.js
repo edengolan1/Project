@@ -15,18 +15,25 @@ function About() {
           md={7}
           sx={{ textAlign: "right", paddingRight: { xs: 0, md: "48px" } }}
         >
-          <Typography color="#018ba3" variant="h4" component={"h4"}>
-            אודותינו
-          </Typography>
-          <Box
-            sx={{
-              borderBottom: "2px solid gray",
-              marginTop: 1,
-              display: "inline-block",
-              width: "102px",
-            }}
-          />
-          <Typography color="black" variant="h6" component={"h6"} sx={{ mt: 1 }}>
+          <Box>
+            <Typography color="#018ba3" variant="h4" component={"h4"}>
+              אודותינו
+            </Typography>
+            <Box
+              sx={{
+                borderBottom: "2px solid #018ba3",
+                marginTop: 1,
+                display: "inline-block",
+                width: "102px",
+              }}
+            />
+          </Box>
+          <Typography
+            color="black"
+            variant="h6"
+            component={"h6"}
+            sx={{ mt: 1 }}
+          >
             קבוצת מייקל קרניצקי הינה אחת מקבוצות הייזום והניהול האיתנות בישראל.
             פעילות הקבוצה החלה בשנת 1991 בענף הרכב, בתחום היבוא ושיווק של רכבי
             BMW ו-MINI בישראל. בהמשך הפעילות בענף הרכב התרחבה לתחום יבוא ושיווק
@@ -38,7 +45,7 @@ function About() {
         </Grid>
       </Grid>
       <Box sx={{ mt: 3, display: "flex", justifyContent: "center" }}>
-        <CustomButton text={'..קרא עוד'} onClick={()=> alert('כפתור')}/>
+        <CustomButton text={"..קרא עוד"} onClick={() => alert("כפתור")} />
       </Box>
     </Box>
   );
