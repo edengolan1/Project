@@ -1,0 +1,25 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(40, 60)">
+    <path
+      d="M0 0 L20 0 L60 50 L100 0 L120 0 L120 80 L100 80 L100 30 L60 80 L20 30 L20 80 L0 80 Z"
+      fill="#009688"
+    />
+    <g fill="#00BCD4">
+      <rect x="30" y="10" width="4" height="40" transform="rotate(45, 32, 30)" />
+      <rect x="38" y="10" width="4" height="40" transform="rotate(45, 40, 30)" />
+      <rect x="46" y="10" width="4" height="40" transform="rotate(45, 48, 30)" />
+      <rect x="54" y="10" width="4" height="40" transform="rotate(45, 56, 30)" />
+    </g>
+  </g>
+  <text
+    x="100"
+    y="170"
+    textAnchor="middle"
+    fontFamily="Arial, sans-serif"
+    fontSize="24"
+    fontWeight="bold"
+    fill="#009688"
+  >
+    MK
+  </text>
+</svg>
