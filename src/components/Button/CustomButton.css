@@ -1,0 +1,55 @@
+.btn17 {
+  --c: #018ba3;
+  color: white;
+  border: 0;
+  border-radius: 90px;
+  width: 180px;
+  text-align: center;
+  line-height: 30px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: 0.5s;
+  height: 45px;
+  background: #018ba3;
+  font-size: 18px;
+}
+
+.btn17 span {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-color: var(--c);
+  transform: translateY(150%);
+  border-radius: 50%;
+  left: calc((var(--n) - 1) * 25%);
+  transition: 0.5s;
+  transition-delay: calc((var(--n) - 1) * 0.05s);
+  z-index: -1;
+}
+
+.btn17:hover {
+  color: #fefefe;
+  background: white;
+  cursor: pointer;
+}
+
+.btn17:hover span {
+  transform: translateY(0) scale(2);
+}
+
+.btn17 span:nth-child(1) {
+  --n: 1;
+}
+
+.btn17 span:nth-child(2) {
+  --n: 2;
+}
+
+.btn17 span:nth-child(3) {
+  --n: 3;
+}
+
+.btn17 span:nth-child(4) {
+  --n: 4;
+}
