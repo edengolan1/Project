@@ -46,7 +46,6 @@ function Contact() {
     <Box
       sx={{
         mt: 8,
-        mb: 6,
         backgroundColor: "whitesmoke",
         padding: "54px",
         display: "flex",
@@ -109,7 +108,7 @@ function Contact() {
               onChange={(e) => setFullName(e.target.value)}
               required
               dir="rtl"
-              sx={{ width: "70%" }}
+              sx={{ width: "80%" }}
               InputProps={{
                 style: { textAlign: "right", borderRadius: "16px" },
               }}
@@ -121,7 +120,7 @@ function Contact() {
               label="אימייל"
               variant="outlined"
               type="email"
-              sx={{ width: "70%" }}
+              sx={{ width: "80%" }}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -137,7 +136,7 @@ function Contact() {
               label="טלפון"
               variant="outlined"
               type="phone"
-              sx={{ width: "70%" }}
+              sx={{ width: "80%" }}
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               required
@@ -155,7 +154,7 @@ function Contact() {
               variant="outlined"
               multiline
               rows={4}
-              sx={{ width: "70%" }}
+              sx={{ width: "80%" }}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
