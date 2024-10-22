@@ -155,6 +155,11 @@ const Contact = () => {
       textAlign: "right",
       paddingRight: "22px",
     },
+    "& input[type=tel]": {
+      direction: "rtl",
+      textAlign: "right",
+      "-moz-appearance": "textfield",
+    },
   };
 
   return (
