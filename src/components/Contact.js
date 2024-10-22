@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { TextField, Typography, Grid, Box, IconButton } from "@mui/material";
+import {
+  TextField,
+  Typography,
+  Grid,
+  Box,
+  IconButton,
+  CircularProgress,
+} from "@mui/material";
 import emailjs from "emailjs-com";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import EmailIcon from "@mui/icons-material/Email";
@@ -11,9 +18,23 @@ function Contact() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const sendEmail = (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("אימייל לא תקין");
+      setLoading(false);
+      return;
+    }
+
     emailjs
       .send(
         "service_npnvzce",
@@ -30,16 +51,20 @@ function Contact() {
       .then(
         (response) => {
           console.log("Email sent:", response);
-          alert("Message sent! Thank you!");
+          setSuccess(".ההודעה נשלחה בהצלחה! תודה");
         },
         (error) => {
           console.error("Email send failed:", error);
+          setError("שגיאה בשליחת ההודעה. אנא נסו שוב מאוחר יותר.");
         }
-      );
-    setFullName("");
-    setEmail("");
-    setPhone("");
-    setMessage("");
+      )
+      .finally(() => {
+        setLoading(false);
+        setFullName("");
+        setEmail("");
+        setPhone("");
+        setMessage("");
+      });
   };
 
   return (
@@ -100,7 +125,6 @@ function Contact() {
       <form onSubmit={sendEmail}>
         <Grid container spacing={2} justifyContent="center" alignItems="center">
           <Grid item xs={12} display="flex" justifyContent="center">
-            {" "}
             <TextField
               label="שם מלא"
               variant="outlined"
@@ -115,7 +139,6 @@ function Contact() {
             />
           </Grid>
           <Grid item xs={12} display="flex" justifyContent="center">
-            {" "}
             <TextField
               label="אימייל"
               variant="outlined"
@@ -131,7 +154,6 @@ function Contact() {
             />
           </Grid>
           <Grid item xs={12} display="flex" justifyContent="center">
-            {" "}
             <TextField
               label="טלפון"
               variant="outlined"
@@ -147,8 +169,6 @@ function Contact() {
             />
           </Grid>
           <Grid item xs={12} display="flex" justifyContent="center">
-            {" "}
-            {/* מרכז את השדה */}
             <TextField
               label="הודעה"
               variant="outlined"
@@ -165,14 +185,28 @@ function Contact() {
             />
           </Grid>
           <Grid item xs={12}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {loading && <CircularProgress size={24} />}
+            </Box>
             <Box sx={{ mt: 3, display: "flex", justifyContent: "center" }}>
               <CustomButton
                 text={"שלח הודעה"}
-                onClick={() => alert("ההודעה נשלחה")}
+                type="submit"
+                disabled={loading}
               />
             </Box>
           </Grid>
         </Grid>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 1 }}>
+          {error && <Typography color="error">{error}</Typography>}
+          {success && <Typography color="success">{success}</Typography>}
+        </Box>
       </form>
     </Box>
   );

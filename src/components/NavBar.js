@@ -79,7 +79,7 @@ function NavBar(props) {
         component="nav"
         sx={{
           backgroundColor: scrolled ? "#018ba3" : "transparent",
-          opacity: scrolled ? 0.8 : 0.5,
+          opacity: scrolled ? 0.7 : 0.5,
           transition: "all 0.3s ease-in-out",
         }}
       >
