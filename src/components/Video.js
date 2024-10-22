@@ -7,7 +7,7 @@ function Video() {
       sx={{
         position: "relative",
         width: "100%",
-        height: "100vh",
+        height: "99vh",
         overflow: "hidden",
         margin: 0,
         padding: 0
