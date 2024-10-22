@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import {
   TextField,
   Typography,
@@ -16,7 +16,6 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import CustomButton from "./Button/CustomButton";
 import Confetti from "react-confetti";
 
-// קבועים - מומלץ להעביר למשתני סביבה
 const EMAILJS_CONFIG = {
   SERVICE_ID: "service_npnvzce",
   TEMPLATE_ID: "template_ywnmreo",
@@ -24,7 +23,6 @@ const EMAILJS_CONFIG = {
   TO_EMAIL: "eden9123@gmail.com",
 };
 
-// וולידציה
 const VALIDATION = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   phone: /^[\d\-+()]{9,}$/,
@@ -46,6 +44,7 @@ const Contact = () => {
   });
   const [showConfetti, setShowConfetti] = useState(false);
   const [errors, setErrors] = useState({});
+  const formRef = useRef(null);
 
   const validateField = (name, value) => {
     switch (name) {
@@ -56,9 +55,9 @@ const Contact = () => {
       case "fullName":
         return VALIDATION.fullName.test(value) ? "" : "שם מלא לא תקין";
       case "message":
-        return value.trim().length >= 10
+        return value.trim().length >= 2
           ? ""
-          : "הודעה חייבת להכיל לפחות 10 תווים";
+          : "הודעה חייבת להכיל לפחות 2 תווים";
       default:
         return "";
     }
@@ -68,7 +67,6 @@ const Contact = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // בדיקת תקינות בזמן הקלדה
     const error = validateField(name, value);
     setErrors((prev) => ({
       ...prev,
@@ -79,7 +77,6 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // וולידציה של כל השדות
     const newErrors = {};
     Object.keys(formData).forEach((key) => {
       const error = validateField(key, formData[key]);
@@ -112,7 +109,6 @@ const Contact = () => {
         EMAILJS_CONFIG.USER_ID
       );
 
-      // איפוס הטופס והצגת אנימציית הצלחה
       setFormData({ fullName: "", phone: "", email: "", message: "" });
       setShowConfetti(true);
       setNotification({
@@ -120,6 +116,8 @@ const Contact = () => {
         message: "ההודעה נשלחה בהצלחה! תודה",
         severity: "success",
       });
+
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
 
       setTimeout(() => setShowConfetti(false), 4000);
     } catch (error) {
@@ -139,11 +137,10 @@ const Contact = () => {
   };
 
   return (
-    <>
-      {showConfetti && <Confetti />}
+    <Box position="relative" ref={formRef}>
       <Box
         sx={{
-          mt: 8,
+          mt: 6,
           backgroundColor: "whitesmoke",
           padding: { xs: "20px", sm: "40px", md: "54px" },
           borderRadius: "16px",
@@ -158,7 +155,6 @@ const Contact = () => {
         >
           צור איתנו קשר
         </Typography>
-
         <Box
           sx={{
             borderBottom: "2px solid #018ba3",
@@ -203,7 +199,6 @@ const Contact = () => {
             </IconButton>
           ))}
         </Box>
-
         <form onSubmit={handleSubmit}>
           <Grid container spacing={3}>
             {[
@@ -213,7 +208,7 @@ const Contact = () => {
               { name: "message", label: "הודעה", multiline: true, rows: 4 },
             ].map((field) => (
               <Grid item xs={12} key={field.name}>
-                <Box sx={{display:'flex',justifyContent:'center'}}>
+                <Box sx={{ display: "flex", justifyContent: "center" }}>
                   <TextField
                     name={field.name}
                     label={field.label}
@@ -240,9 +235,8 @@ const Contact = () => {
                 </Box>
               </Grid>
             ))}
-
             <Grid item xs={12}>
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
                 <CustomButton
                   text={loading ? "...שולח" : "שלח הודעה"}
                   type="submit"
@@ -253,7 +247,6 @@ const Contact = () => {
             </Grid>
           </Grid>
         </form>
-
         <Snackbar
           open={notification.open}
           autoHideDuration={6000}
@@ -269,7 +262,27 @@ const Contact = () => {
           </Alert>
         </Snackbar>
       </Box>
-    </>
+      {showConfetti && (
+        <Box
+          position="fixed"
+          bottom={0}
+          left={0}
+          right={0}
+          height="100vh"
+          zIndex={1000}
+          sx={{ pointerEvents: "none" }}
+        >
+          <Confetti
+            width={window.innerWidth}
+            height={window.innerHeight}
+            recycle={false}
+            numberOfPieces={200}
+            gravity={0.3}
+            initialVelocityY={20}
+          />
+        </Box>
+      )}
+    </Box>
   );
 };
 
