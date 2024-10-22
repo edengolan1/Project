@@ -55,9 +55,9 @@ const Contact = () => {
       case "fullName":
         return VALIDATION.fullName.test(value) ? "" : "שם מלא לא תקין";
       case "message":
-        return value.trim().length >= 2
+        return value.trim().length >= 10
           ? ""
-          : "הודעה חייבת להכיל לפחות 2 תווים";
+          : "הודעה חייבת להכיל לפחות 10 תווים";
       default:
         return "";
     }
@@ -136,11 +136,32 @@ const Contact = () => {
     setNotification((prev) => ({ ...prev, open: false }));
   };
 
+  const textFieldStyle = {
+    "& .MuiOutlinedInput-root": {
+      borderRadius: "12px",
+    },
+    width: "80%",
+    "& .MuiInputLabel-root": {
+      right: "1.75rem",
+      left: "auto",
+      transformOrigin: "right",
+      fontSize: "1rem",
+    },
+    "& .MuiInputLabel-shrink": {
+      transform: "translate(0, -1.5px) scale(0.75)",
+      right: "1.75rem",
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+      textAlign: "right",
+      paddingRight: "22px",
+    },
+  };
+
   return (
     <Box position="relative" ref={formRef}>
       <Box
         sx={{
-          mt: 6,
+          mt: 8,
           backgroundColor: "whitesmoke",
           padding: { xs: "20px", sm: "40px", md: "54px" },
           borderRadius: "16px",
@@ -155,6 +176,7 @@ const Contact = () => {
         >
           צור איתנו קשר
         </Typography>
+
         <Box
           sx={{
             borderBottom: "2px solid #018ba3",
@@ -199,6 +221,7 @@ const Contact = () => {
             </IconButton>
           ))}
         </Box>
+
         <form onSubmit={handleSubmit}>
           <Grid container spacing={3}>
             {[
@@ -222,21 +245,21 @@ const Contact = () => {
                     required
                     dir="rtl"
                     variant="outlined"
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        borderRadius: "12px",
-                      },
-                      width: "80%",
-                    }}
+                    sx={textFieldStyle}
                     InputProps={{
                       style: { textAlign: "right" },
+                    }}
+                    FormHelperTextProps={{
+                      style: { textAlign: "right" },
+                      dir: "rtl",
                     }}
                   />
                 </Box>
               </Grid>
             ))}
+
             <Grid item xs={12}>
-              <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <CustomButton
                   text={loading ? "...שולח" : "שלח הודעה"}
                   type="submit"
@@ -247,6 +270,7 @@ const Contact = () => {
             </Grid>
           </Grid>
         </form>
+
         <Snackbar
           open={notification.open}
           autoHideDuration={6000}
