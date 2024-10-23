@@ -17,8 +17,8 @@ import CustomButton from "./Button/CustomButton";
 import Confetti from "react-confetti";
 
 const EMAILJS_CONFIG = {
-  SERVICE_ID: "service_npnvzce",
-  TEMPLATE_ID: "template_ywnmreo",
+  SERVICE_ID: "service_companyMK",
+  TEMPLATE_ID: "template_companyMK",
   USER_ID: "rVzX5fBmrNmT9I_Cq",
   TO_EMAIL: "eden9123@gmail.com",
 };
@@ -55,9 +55,9 @@ const Contact = () => {
       case "fullName":
         return VALIDATION.fullName.test(value) ? "" : "שם מלא לא תקין";
       case "message":
-        return value.trim().length >= 10
+        return value.trim().length >= 2
           ? ""
-          : "הודעה חייבת להכיל לפחות 10 תווים";
+          : "הודעה חייבת להכיל לפחות 2 תווים";
       default:
         return "";
     }
